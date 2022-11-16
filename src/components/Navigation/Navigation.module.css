@@ -1,0 +1,12 @@
+
+.nav{
+  background-color: aqua;
+}
+.nav__menu{
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  list-style-type: none;
+  width: 100px;
+  align-items: center;
+}

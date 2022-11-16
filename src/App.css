@@ -3,22 +3,3 @@
     padding: 0;
     box-sizing: border-box;
 }
-
-.header{
-    background-color: red;
-}
-.main{
-    display: flex;
-}
-.nav{
-    background-color: aqua;
-}
-.nav__menu{
-    display: flex;
-    flex-direction: column;
-}
-.intro{
-    background-color: green;
-    width: 100%;
-}
-
