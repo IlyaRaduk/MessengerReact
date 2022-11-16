@@ -1,12 +1,12 @@
-import Navigation from '../Navigation/Navigation';
-import Intro from '../Intro/Intro';
+import Navigation from './Navigation/Navigation';
+import Posts from './Posts/Posts';
 import classes from './Main.module.css';
 
 function Main(){
     return(
     <main className={classes.main}>
         <Navigation/>
-        <Intro/>
+        <Posts/>
     </main>
     )
 }
