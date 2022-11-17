@@ -1,6 +1,6 @@
 
 .nav{
-  background-color: aqua;
+  background-color: rgb(31, 24, 24);
 }
 .nav__menu{
   display: flex;
@@ -10,4 +10,12 @@
   width: 100px;
   align-items: center;
   text-align: center;
+} 
+.nav__item a{
+  color: blue;
+  text-decoration: none;
+  
+}
+.nav__item .active{
+  color:gold; 
 }

@@ -1,0 +1,14 @@
+.list{
+    background-color: blueviolet;
+    width: 150px;
+    height: 100%;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.item a{
+    color: rgb(136, 136, 163);
+    text-decoration: none;
+}
