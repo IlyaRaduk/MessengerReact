@@ -8,9 +8,9 @@ function Posts(){
           <button>add post</button>
           <button>remove</button>
         <p className={classes.text}>Основной контент</p>
-        <Post/>
-        <Post/>
-        <Post/>
+        <Post message='Первый пост'/>
+        <Post message='Второй пост'/>
+        <Post message='Третий пост'/>
       </section>
     )
 }

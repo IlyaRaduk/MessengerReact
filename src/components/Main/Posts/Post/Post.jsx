@@ -1,9 +1,9 @@
 
 import classes from './Post.module.css';
 
-function Post(){
+function Post(props){
     return(
-    <p>Первый пост</p>
+    <p>{props.message}</p>
     )
 }
 export default Post;
