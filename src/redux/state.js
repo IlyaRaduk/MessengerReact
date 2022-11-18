@@ -9,6 +9,7 @@ const state = {
             {id:5, name:"Ecaterina", post:"Привет как дела?",like:2},
             {id:6, name:"Georgii", post:"assigned a value but",like:1},
         ],
+        newPostText:'введите текст',
     },
     dialogsPage:{
         dialogsItems: [
@@ -20,6 +21,11 @@ const state = {
             {name: 'Georgii', id:6},
         ],
     },
+}
+
+export let changeLetters = (text)=>{
+    state.profilePage.newPostText = text;
+    rerender(state);
 }
 
 export let addPost = (postMessage) =>{

@@ -7,7 +7,7 @@ function App(props) {
    
     <div className="App" >
       <Header/>
-      <Main state={props.state} addPost={props.addPost}/>
+      <Main state={props.state} addPost={props.addPost} changeLetters={props.changeLetters}/>
     </div>
 
   );

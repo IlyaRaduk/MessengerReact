@@ -11,7 +11,7 @@ function Main(props){
         <main className={classes.main}>
             <Navigation/>
             <Routes>
-                <Route path="/profile" element={<Posts profilePage={props.state.profilePage} addPost={props.addPost}/>} />
+                <Route path="/profile" element={<Posts profilePage={props.state.profilePage} addPost={props.addPost} changeLetters={props.changeLetters}/>} />
                 <Route path="/dialogs/*" element={<Dialogs dialogsPage= {props.state.dialogsPage}/>}/>
                 <Route path="/friends/*" element={<Friends />}/>
                 <Route path="/about" element={<About />}/>

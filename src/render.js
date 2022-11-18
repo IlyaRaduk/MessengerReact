@@ -4,15 +4,16 @@ import App from './App';
 import {BrowserRouter} from 'react-router-dom';
 // import state from './redux/state';
 import {addPost} from './redux/state';
-
+import { changeLetters } from './redux/state';
  
+const root = ReactDOM.createRoot(document.getElementById('root'));
 export let rerender=(state)=>{
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App state={state} addPost={addPost}/>
+      <App state={state} addPost={addPost} changeLetters={changeLetters}/>
     </BrowserRouter>
   </React.StrictMode>
 )}

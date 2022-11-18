@@ -9,12 +9,17 @@ function Posts(props){
 
     let text = newPostElement.current.value; 
     props.addPost(text);
-    newPostElement.current.value='';
+    props.changeLetters('Введите текст');
+  }
+  let changeLetters = ()=>{
+    let text = newPostElement.current.value;
+    props.changeLetters(text);
+    
   }
 
     return(
         <section className={classes.posts}>
-          <textarea ref={newPostElement} name="" id="" cols="30" rows="10"></textarea>
+          <textarea onChange={changeLetters} ref={newPostElement} value={props.profilePage.newPostText} ></textarea>
           <button onClick={addPost}>add post</button>
           <button>remove</button>
         <p className={classes.text}>Основной контент</p>
