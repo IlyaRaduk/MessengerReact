@@ -1,29 +1,27 @@
 import classes from './Posts.module.css';
 import Post from './Post/Post';
 import React from 'react';
-function Posts(props){
 
+function Posts(props){
   let newPostElement = React.createRef();
 
-  let addPost = ()=>{
-
-    let text = newPostElement.current.value; 
-    props.addPost(text);
-    props.changeLetters('Введите текст');
+  let onAddPost = ()=>{
+    props.addPost();
   }
-  let changeLetters = ()=>{
+
+  let onChangeLetters = ()=>{
     let text = newPostElement.current.value;
     props.changeLetters(text);
-    
   }
 
+  
     return(
         <section className={classes.posts}>
-          <textarea onChange={changeLetters} ref={newPostElement} value={props.profilePage.newPostText} ></textarea>
-          <button onClick={addPost}>add post</button>
+          <textarea onChange={onChangeLetters} ref={newPostElement}  value={props.value} ></textarea>
+          <button onClick={onAddPost}>add post</button>
           <button>remove</button>
         <p className={classes.text}>Основной контент</p>
-        <Post  postsItems={props.profilePage.postsItems}/>
+        <Post  postsItems={props.postsItems}/>
       </section>
     )
 }

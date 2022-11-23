@@ -1,5 +1,5 @@
 import Navigation from './Navigation/Navigation';
-import Posts from './Posts/Posts';
+import PostsContainer from './Posts/PostsContainer';
 import classes from './Main.module.css';
 import Dialogs from './Dialogs/Dialogs';
 import {Route,Routes} from 'react-router-dom';
@@ -11,8 +11,8 @@ function Main(props){
         <main className={classes.main}>
             <Navigation/>
             <Routes>
-                <Route path="/profile" element={<Posts profilePage={props.state.profilePage} addPost={props.addPost} changeLetters={props.changeLetters}/>} />
-                <Route path="/dialogs/*" element={<Dialogs dialogsPage= {props.state.dialogsPage}/>}/>
+                <Route path="/profile" element={<PostsContainer store={props.store}/>} />
+                <Route path="/dialogs/*" element={<Dialogs store={props.store}/>}/>
                 <Route path="/friends/*" element={<Friends />}/>
                 <Route path="/about" element={<About />}/>
             </Routes>

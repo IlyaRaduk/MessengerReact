@@ -1,11 +1,32 @@
 import classes from './Messages.module.css';
+import React from 'react';
 
 
 function Messages(props){
+    const createMessages = (data)=>{
+        return data.map((e)=>{
+            return <div>{e}</div>
+        })
+    }
+    let newMessageElement = React.createRef();
+
+    let onAddMessage = ()=>{
+      props.addMessage();
+    }
+    let onChangeLetters = ()=>{
+      let text = newMessageElement.current.value;
+      props.changeLetters(text);
+      
+    }
     return(
-        <div className={classes.messages}>
-            Сообщение  -{props.message} 
-        </div>
+        <>
+            <textarea onChange={onChangeLetters} ref={newMessageElement} value={props.value} ></textarea>
+            <button onClick={onAddMessage}>send</button>
+            <div className={classes.messages}>
+                Диалог с {props.id}
+                {createMessages(props.messages)}
+            </div>
+        </>
     )
 }
 export default Messages
