@@ -18,13 +18,24 @@ let initialState ={
 
 const dialogsReducer =(state=initialState,action)=>{
     if (action.type==='CHANGE-LETTERS-MESSAGE'){
-        state.newMessageText = action.text;
+        let copyState= {
+          ...state,
+          newMessageText: action.text,
+        }
+       return copyState;
     }
     else if (action.type==='ADD-MESSAGE'){
-        state.messages.push(state.newMessageText);
-        state.newMessageText='';
+        let copyState= {
+          ...state,
+          messages: [...state.messages]
+        }
+        copyState.messages.push(state.newMessageText);
+        copyState.newMessageText='';
+        return copyState;
     }
-    return state;
+    else{
+      return state;
+    }
 }
 
 export default dialogsReducer;

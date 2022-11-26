@@ -3,8 +3,8 @@ import PostsContainer from './Posts/PostsContainer';
 import classes from './Main.module.css';
 import Dialogs from './Dialogs/Dialogs';
 import {Route,Routes} from 'react-router-dom';
-import Friends from './Friends/Friends';
 import About from './About/About';
+import FriendsContainer from './Friends/FriendsContainer';
 
 function Main(props){
     return(
@@ -13,7 +13,7 @@ function Main(props){
             <Routes>
                 <Route path="/profile" element={<PostsContainer/>} />
                 <Route path="/dialogs/*" element={<Dialogs/>}/>
-                <Route path="/friends/*" element={<Friends />}/>
+                <Route path="/friends/*" element={<FriendsContainer />}/>
                 <Route path="/about" element={<About />}/>
             </Routes>
         </main>

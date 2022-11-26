@@ -3,3 +3,11 @@
   background-color: darkolivegreen;
   color: black;
 }
+.userList{
+  display: flex;
+  flex-direction: column;
+}
+.userPhoto{
+  width: 200px;
+  height: 200px;
+}

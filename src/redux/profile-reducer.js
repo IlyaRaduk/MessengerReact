@@ -19,14 +19,22 @@ const profileReducer =(state=initialState,action)=>{
             post: state.newPostText,
             like: 0,
         }
-        state.postsItems.push(newPost);
-        state.newPostText='';
-       
+        let copyState={...state,
+          postsItems:[...(state.postsItems)],
+        };
+        copyState.postsItems.push(newPost);
+        copyState.newPostText='';
+       return copyState;
     }
     else if (action.type==='CHANGE-LETTERS'){
-        state.newPostText = action.text;
+        let copyState={...state,
+          newPostText:  action.text
+        };
+        return copyState;
     }
+    else {
     return state;
+    }
 }
 
 export default profileReducer;
