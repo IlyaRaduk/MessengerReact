@@ -11,3 +11,16 @@
   width: 200px;
   height: 200px;
 }
+.pageList{
+  list-style-type: none;
+  display: flex;
+}
+.pageList li{
+ margin-left: 5px;
+}
+.selectedPage{
+  color:red;
+}
+.pageList li:hover{
+  cursor: pointer;
+}

@@ -2,7 +2,10 @@
 
 let initialState ={
  users:[
- ]
+ ],
+ pageSize:5,
+ totalUsersCount:'',
+ currentPage:1,
 }
 
 const friendsReducer =(state=initialState,action)=>{
@@ -31,7 +34,19 @@ const friendsReducer =(state=initialState,action)=>{
     case 'SET_USERS':{
       return{
         ...state,
-        users:[...state.users, ...action.users]
+        users:[...action.users]
+      }
+    }
+    case 'SELECTED_PAGE':{
+      return{
+        ...state,
+        currentPage: action.page,
+      }
+    }
+    case 'SET_TOTAL_USERS_COUNT':{
+      return{
+        ...state,
+        totalUsersCount: action.TotalUsersCount,
       }
     }
     default: 
@@ -57,6 +72,18 @@ export const setUsersActionCreator = (users)=> {
   return {
     type:'SET_USERS',
     users,
+  }
+}
+export const selectedPage = (page)=> {
+  return {
+    type:'SELECTED_PAGE',
+    page,
+  }
+}
+export const setTotalUsersCount = (TotalUsersCount)=> {
+  return {
+    type:'SET_TOTAL_USERS_COUNT',
+    TotalUsersCount,
   }
 }
   
