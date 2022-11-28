@@ -1,6 +1,6 @@
 
 import classes from './Friends.module.css';
-
+import Prelouder from '../../Prelouder/Prelouder';
 function Friends(props){
 
     let pageCount = Math.ceil(props.totalUsersCount/props.pageSize);
@@ -10,7 +10,8 @@ function Friends(props){
     }
     
     return(
-        <>
+        <>  
+            
             <div className={classes.userList}>
                 <div>
                     <ul className={classes.pageList}>
@@ -20,26 +21,30 @@ function Friends(props){
                     
                     </ul>
                 </div>
-                {props.users.map((e)=>{
+
+                {props.isFetching?<Prelouder/>:<>{props.users.map((e)=>{
                     return <div key={e.id} >
-                        <div>
                             <div>
-                                <img src={e.photoUrl} alt="" className={classes.userPhoto} />
+                                <div>
+                                    <img src={e.photoUrl} alt="" className={classes.userPhoto} />
+                                </div>
+                                {e.followed?<button onClick={()=>{props.unfollow(e.id)}}>Follow</button>:<button onClick={()=>{props.follow(e.id)}}>Unfollow</button>}
                             </div>
-                            {e.followed?<button onClick={()=>{props.unfollow(e.id)}}>Follow</button>:<button onClick={()=>{props.follow(e.id)}}>Unfollow</button>}
+                            <div>
+                                <div>
+                                    <p>{e.name}</p>
+                                    <p>{e.status}</p>
+                                </div>
+                                <div>
+                                    <p>{e.location.city}</p>
+                                    <p>{e.location.country}</p>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <div>
-                                <p>{e.name}</p>
-                                <p>{e.status}</p>
-                            </div>
-                            <div>
-                                <p>{e.location.city}</p>
-                                <p>{e.location.country}</p>
-                            </div>
-                        </div>
-                    </div>
-                })}
+                    })}
+                </>}
+                
+                
             </div>
         </>
     )

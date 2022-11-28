@@ -51,15 +51,21 @@ class FriendsClassAPI extends React.Component {
     }
 
     selectedPages(page){
-        this.props.selectedPage(page);
+        this.props.togleIsFetching(true)
+        setTimeout(()=> {this.props.selectedPage(page);
+        this.props.togleIsFetching(false);
         let users = this.getUsers(page);
-        this.props.setUsers(users.users);
+        this.props.setUsers(users.users)},500);
     }
 
     componentDidMount(){
+        this.props.togleIsFetching(true)
+        setTimeout(()=> {
+        this.props.togleIsFetching(false);
         let users = this.getUsers(1);
         this.props.setUsers(users.users);
         this.props.setTotalUsersCount( users.totalUsersCount);
+        },500)
        
     }
 
@@ -73,7 +79,10 @@ class FriendsClassAPI extends React.Component {
             currentPage={this.props.currentPage}
             users={this.props.users} 
             unfollow={this.props.unfollow}
-            follow= {this.props.follow}/>
+            follow= {this.props.follow}
+            isFetching={this.props.isFetching}
+           
+            />
         )
     }
 }

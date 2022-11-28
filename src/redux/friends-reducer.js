@@ -6,6 +6,7 @@ let initialState ={
  pageSize:5,
  totalUsersCount:'',
  currentPage:1,
+ isFetching:true,
 }
 
 const friendsReducer =(state=initialState,action)=>{
@@ -49,6 +50,12 @@ const friendsReducer =(state=initialState,action)=>{
         totalUsersCount: action.TotalUsersCount,
       }
     }
+    case 'TOGLE_IS_FETCHING':{
+      return{
+        ...state,
+        isFetching: action.isFetching,
+      }
+    }
     default: 
       return state;
    }
@@ -86,4 +93,11 @@ export const setTotalUsersCount = (TotalUsersCount)=> {
     TotalUsersCount,
   }
 }
+export const togleIsFetching = (isFetching)=> {
+  return {
+    type:'TOGLE_IS_FETCHING',
+    isFetching,
+  }
+}
+  
   
