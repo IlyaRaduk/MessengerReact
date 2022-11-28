@@ -3,7 +3,7 @@ import classes from './Friends.module.css';
 
 function Friends(props){
 
-    let pageCount = Math.ceil(this.props.totalUsersCount/ this.props.pageSize);
+    let pageCount = Math.ceil(props.totalUsersCount/props.pageSize);
     let pages = [];
     for (let i=1;i<=pageCount;i++){
         pages.push(i);
@@ -11,23 +11,22 @@ function Friends(props){
     
     return(
         <>
-
             <div className={classes.userList}>
                 <div>
                     <ul className={classes.pageList}>
                         {pages.map((e)=>{
-                            return <li onClick={()=>{selectedPages(e)}} className={this.props.currentPage===e && classes.selectedPage}>{e}</li>
+                            return <li onClick={()=>{props.selectedPages(e)}} className={props.currentPage===e && classes.selectedPage}>{e}</li>
                         })}
                     
                     </ul>
                 </div>
-                {this.props.users.map((e)=>{
+                {props.users.map((e)=>{
                     return <div key={e.id} >
                         <div>
                             <div>
                                 <img src={e.photoUrl} alt="" className={classes.userPhoto} />
                             </div>
-                            {e.followed?<button onClick={()=>{this.props.unfollow(e.id)}}>Follow</button>:<button onClick={()=>{this.props.follow(e.id)}}>Unfollow</button>}
+                            {e.followed?<button onClick={()=>{props.unfollow(e.id)}}>Follow</button>:<button onClick={()=>{props.follow(e.id)}}>Unfollow</button>}
                         </div>
                         <div>
                             <div>

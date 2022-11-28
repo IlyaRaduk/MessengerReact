@@ -1,11 +1,12 @@
 import React from 'react';
-import classes from './Friends.module.css';
 import Friends from './Friends';
 
 
 class FriendsClassAPI extends React.Component {
 
-
+    // constructor(props){
+    //     super(props);
+    // }
 
     getUsers(currentPage){
         const USERS = [
@@ -32,9 +33,9 @@ class FriendsClassAPI extends React.Component {
             {id:21, photoUrl:'https://www.iphones.ru/wp-content/uploads/2020/05/1-1-4.jpg',followed:false,name:'QQQQQQQQ',status:'I am a boss2followed:false,',location:{city:'Minsk',country:'Belarus'}},
         ]
 
-        let userAPI= (pageSize,currentPage)=>{
+        let userAPI = (pageSize,currentPage)=>{
             let users =[];
-            if(currentPage==1){
+            if(currentPage===1){
                 users = USERS.slice(0,pageSize)
             }
             else{
@@ -49,9 +50,12 @@ class FriendsClassAPI extends React.Component {
         return userAPI(this.props.pageSize,currentPage);
     }
 
-    // constructor(props){
-    //     super(props);
-    // }
+    selectedPages(page){
+        this.props.selectedPage(page);
+        let users = this.getUsers(page);
+        this.props.setUsers(users.users);
+    }
+
     componentDidMount(){
         let users = this.getUsers(1);
         this.props.setUsers(users.users);
@@ -60,18 +64,16 @@ class FriendsClassAPI extends React.Component {
     }
 
     render(){
-        let selectedPages = (page)=>{
-            this.props.selectedPage(page);
-            let users = this.getUsers(page);
-            this.props.setUsers(users.users);
-        }
-        let pageCount = Math.ceil(this.props.totalUsersCount/ this.props.pageSize);
-        let pages = [];
-        for (let i=1;i<=pageCount;i++){
-            pages.push(i);
-        }
+
         return(
-            <Friends/>
+            <Friends 
+            totalUsersCount ={this.props.totalUsersCount} 
+            pageSize={this.props.pageSize} 
+            selectedPages={this.selectedPages.bind(this)}
+            currentPage={this.props.currentPage}
+            users={this.props.users} 
+            unfollow={this.props.unfollow}
+            follow= {this.props.follow}/>
         )
     }
 }
