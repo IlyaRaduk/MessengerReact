@@ -17,7 +17,7 @@ function Posts(props){
   
     return(
         <section className={classes.posts}>
-          <textarea onChange={onChangeLetters} ref={newPostElement}  value={props.value} ></textarea>
+          <textarea onChange={onChangeLetters} ref={newPostElement}  value={props.newPostText} ></textarea>
           <button onClick={onAddPost}>add post</button>
           <button>remove</button>
         <p className={classes.text}>Основной контент</p>

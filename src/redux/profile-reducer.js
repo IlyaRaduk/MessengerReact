@@ -1,5 +1,6 @@
 
 let initialState ={
+  profile: null,
   postsItems:[
       {id:1, name:"Ilya", post:"Мой первый пост!!!",like:96},
       {id:2, name:"Polina", post:"Это пост от Полины эй!",like:28},
@@ -12,32 +13,48 @@ let initialState ={
 };
 
 const profileReducer =(state=initialState,action)=>{
-    if (action.type==='ADD-POST'){
-        let newPost = {
-            id: 1,
-            name: 'Ilya',
-            post: state.newPostText,
-            like: 0,
-        }
-        let copyState={...state,
-          postsItems:[...(state.postsItems)],
-        };
-        copyState.postsItems.push(newPost);
-        copyState.newPostText='';
-       return copyState;
+  switch(action.type){
+    case 'ADD-POST':{
+      let newPost = {
+        id: 1,
+        name: 'Ilya',
+        post: state.newPostText,
+        like: 0,
+      }
+      let copyState={...state,
+        postsItems:[...(state.postsItems)],
+      };
+      copyState.postsItems.push(newPost);
+      copyState.newPostText='';
+      return copyState;
     }
-    else if (action.type==='CHANGE-LETTERS'){
-        let copyState={...state,
-          newPostText:  action.text
-        };
-        return copyState;
+    case 'CHANGE-LETTERS':{
+      let copyState={...state,
+        newPostText:  action.text
+      };
+      return copyState;
     }
-    else {
-    return state;
+    case 'SET_PROFILE':{
+      return{
+        ...state,
+        profile: action.profile,
+      }
     }
+    default: {
+      return state;
+    }
+  }
 }
+    
 
 export default profileReducer;
+
+export const setProfileActionCreator = (profile)=> {
+  return {
+    type:'SET_PROFILE',
+    profile,
+  }
+}
 
 export const addPostActionCreator = ()=> {
     return {

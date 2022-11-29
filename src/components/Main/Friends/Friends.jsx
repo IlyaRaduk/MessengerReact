@@ -1,6 +1,7 @@
-
+import {NavLink} from 'react-router-dom';
 import classes from './Friends.module.css';
 import Prelouder from '../../Prelouder/Prelouder';
+
 function Friends(props){
 
     let pageCount = Math.ceil(props.totalUsersCount/props.pageSize);
@@ -26,7 +27,8 @@ function Friends(props){
                     return <div key={e.id} >
                             <div>
                                 <div>
-                                    <img src={e.photoUrl} alt="" className={classes.userPhoto} />
+                                   
+                                <NavLink to={"/profile"+"/"+e.id}> <img src={e.photoUrl} alt="" className={classes.userPhoto} /></NavLink >
                                 </div>
                                 {e.followed?<button onClick={()=>{props.unfollow(e.id)}}>Follow</button>:<button onClick={()=>{props.follow(e.id)}}>Unfollow</button>}
                             </div>

@@ -1,14 +1,33 @@
+import Profile from './Profile';
 import React from 'react';
-import Friends from './Friends';
+import { connect } from 'react-redux';
+import { setProfileActionCreator } from '../../../redux/profile-reducer';
+import Prelouder from './../../Prelouder/Prelouder';
+import {
+    useLocation,
+    useNavigate,
+    useParams,
+} from "react-router-dom";
+// wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
+function withRouter(Component) {
+    function ComponentWithRouterProp(props) {
+        let location = useLocation();
+        let navigate = useNavigate();
+        let params = useParams();
+        return (
+            <Component
+                {...props}
+                router={{ location, navigate, params }}
+            />
+        );
+    }
 
+    return ComponentWithRouterProp;
+}
 
-class FriendsClassAPI extends React.Component {
+class ProfileContainer extends React.Component{
 
-    // constructor(props){
-    //     super(props);
-    // }
-
-    getUsers(currentPage){
+    getUser(id){
         const USERS = [
             {id:1, photoUrl:'https://www.iphones.ru/wp-content/uploads/2020/05/1-1-4.jpg',followed:false,name:'Ilya',status:'I am a boss',location:{city:'Minsk',country:'Belarus'}},
             {id:2, photoUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGrTuyVvRpS-lz4Rg4jVaT9P7iKAx3T2vK5Q&usqp=CAU',followed:false,name:'Ivan',status:'I am a brothers',location:{city:'Novoelnya',country:'Belarus'}},
@@ -33,57 +52,44 @@ class FriendsClassAPI extends React.Component {
             {id:21, photoUrl:'https://handcraftguide.com/sites/default/files/styles/original___water/public/sketchingforkids1handcraftguide.com__0.jpg?itok=CiUYaUmE',followed:false,name:'QQQQQQQQ',status:'I am a boss2followed:false,',location:{city:'Minsk',country:'Belarus'}},
         ]
 
-        let userAPI = (pageSize,currentPage)=>{
-            let users =[];
-            if(currentPage===1){
-                users = USERS.slice(0,pageSize)
-            }
-            else{
-                users = USERS.slice(pageSize*currentPage-pageSize,pageSize*currentPage);
-            }
-            
-            return {
-                totalUsersCount: USERS.length,
-                users:users,
-            }
-        }
-        return userAPI(this.props.pageSize,currentPage);
+        return USERS[id];
+        
     }
-
-    selectedPages(page){
-        this.props.togleIsFetching(true)
-        setTimeout(()=> {this.props.selectedPage(page);
-        this.props.togleIsFetching(false);
-        let users = this.getUsers(page);
-        this.props.setUsers(users.users)},500);
-    }
-
     componentDidMount(){
-        this.props.togleIsFetching(true)
-        setTimeout(()=> {
-        this.props.togleIsFetching(false);
-        let users = this.getUsers(1);
-        this.props.setUsers(users.users);
-        this.props.setTotalUsersCount( users.totalUsersCount);
-        },500)
-       
+        console.log(this.props)
+        let profile = this.getUser(this.props.router.params.id-1);
+        this.props.setProfile(profile);
     }
 
     render(){
-
+        if (this.props.profile===null){
+            return (
+                <Prelouder/>
+            )
+        }
+        else
         return(
-            <Friends 
-            totalUsersCount ={this.props.totalUsersCount} 
-            pageSize={this.props.pageSize} 
-            selectedPages={this.selectedPages.bind(this)}
-            currentPage={this.props.currentPage}
-            users={this.props.users} 
-            unfollow={this.props.unfollow}
-            follow= {this.props.follow}
-            isFetching={this.props.isFetching}
-           
-            />
+            <Profile profile={this.props.profile}/>
         )
+
+    }
+
+}
+
+
+let mapStateToProps = (state)=>{
+    return{
+        profile: state.profilePage.profile,
     }
 }
-export default FriendsClassAPI;
+let mapDispatchToProps = (dispatch)=>{
+    return{
+        setProfile:(profile)=>{
+            dispatch(setProfileActionCreator(profile))
+        },
+    }
+}
+
+let WithUrlProfileContainer=withRouter(ProfileContainer);
+
+export default connect(mapStateToProps,mapDispatchToProps)(WithUrlProfileContainer);
