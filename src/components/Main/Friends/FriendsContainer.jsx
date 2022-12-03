@@ -1,6 +1,6 @@
 
 import { connect } from 'react-redux';
-import { followActionCreator, unfollowActionCreator, setUsersActionCreator, selectedPage, setTotalUsersCount, togleIsFetching } from '../../../redux/friends-reducer';
+import {followThunkCreator, unFollowThunkCreator, selectedPagesThunkCreator } from '../../../redux/friends-reducer';
 import FriendsClassAPI from './FriendsClassAPI';
 
 
@@ -15,25 +15,15 @@ let mapStateToProps = (state) => {
 }
 let mapDispatchToProps = (dispatch) => {
     return {
-        follow: (userId) => {
-            dispatch(followActionCreator(userId))
+        follow: (id) => {
+            dispatch(followThunkCreator(id))
         },
-        unfollow: (userId) => {
-            dispatch(unfollowActionCreator(userId))
+        unFollow: (id) => {
+            dispatch(unFollowThunkCreator(id))
         },
-        setUsers: (users) => {
-            dispatch(setUsersActionCreator(users))
+        selectedPages: (page)=>{
+            dispatch(selectedPagesThunkCreator(page))
         },
-        selectedPage: (page) => {
-            dispatch(selectedPage(page))
-        },
-        setTotalUsersCount: (TotalUsersCount) => {
-            dispatch(setTotalUsersCount(TotalUsersCount))
-        },
-        togleIsFetching: (isFetching) => {
-            dispatch(togleIsFetching(isFetching))
-        }
-
     }
 }
 

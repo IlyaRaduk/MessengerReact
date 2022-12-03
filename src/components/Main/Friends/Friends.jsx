@@ -2,8 +2,6 @@ import { NavLink } from 'react-router-dom';
 import classes from './Friends.module.css';
 import Prelouder from '../../Prelouder/Prelouder';
 import Btn from '../../Button/Btn';
-import axios from 'axios';
-import { followAPI, unfollowAPI } from '../../../api';
 
 function Friends(props) {
 
@@ -11,24 +9,6 @@ function Friends(props) {
     let pages = [];
     for (let i = 1; i <= pageCount; i++) {
         pages.push(i);
-    }
-
-    let follow = (id) => {
-        followAPI(id)
-            .then((data) => {
-                if (data) {
-                    props.follow(id)
-                }
-            })
-    }
-
-    let unfollow = (id) => {
-        unfollowAPI(id)
-            .then((data) => {
-                if (data) {
-                    props.unfollow(id)
-                }
-            })
     }
 
     return (
@@ -61,8 +41,8 @@ function Friends(props) {
                             <p className={classes.user__status}>{e.status}</p>
 
                         </div>
-                        {e.followed ? <Btn isActive={false} setClick={() => { unfollow(e.id) }} title={'Unollow'} />
-                            : <Btn isActive={true} setClick={() => { follow(e.id) }} title={'Follow'} />}
+                        {e.followed ? <Btn isActive={false} setClick={() => { props.unFollow(e.id) }} title={'Unollow'} />
+                            : <Btn isActive={true} setClick={() => { props.follow(e.id) }} title={'Follow'} />}
                     </div>
                 })}
                 </>}

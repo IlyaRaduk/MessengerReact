@@ -1,4 +1,4 @@
-
+import { followAPI, unfollowAPI, getUsersAPI } from "../api";
 
 let initialState = {
   users: [
@@ -65,6 +65,8 @@ export default friendsReducer;
 
 
 
+
+
 export const followActionCreator = (userId) => {
   return {
     type: 'FOLLOW',
@@ -100,6 +102,35 @@ export const togleIsFetching = (isFetching) => {
     type: 'TOGLE_IS_FETCHING',
     isFetching,
   }
+}
+
+export const followThunkCreator = (id) => (dispatch) => {
+  followAPI(id)
+    .then((data) => {
+      if (data) {
+        dispatch(followActionCreator(id))
+      }
+    })
+}
+
+export const unFollowThunkCreator = (id) => (dispatch) => {
+  unfollowAPI(id)
+    .then((data) => {
+      if (data) {
+        dispatch(unfollowActionCreator(id))
+      }
+    })
+}
+
+export const selectedPagesThunkCreator = (page) => (dispatch) => {
+  dispatch(togleIsFetching(true));
+  dispatch(selectedPage(page));
+  getUsersAPI(page)
+    .then(data => {
+      dispatch(togleIsFetching(false));
+      dispatch(setUsersActionCreator(data.users));
+      dispatch(setTotalUsersCount(data.totalUsersCount));
+    })
 }
 
 

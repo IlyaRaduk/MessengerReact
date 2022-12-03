@@ -1,3 +1,4 @@
+import { getProfileAPI } from "../api";
 
 let initialState = {
   profile: null,
@@ -69,4 +70,11 @@ export const changeLettersActionCreator = (text) => {
     type: 'CHANGE-LETTERS',
     text: text,
   }
+}
+
+export const getProfileThunkCreator = (id) => (dispatch) => {
+  getProfileAPI(id)
+    .then((data) => {
+      dispatch(setProfileActionCreator(data));
+    })
 }

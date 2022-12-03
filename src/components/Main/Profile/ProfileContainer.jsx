@@ -1,14 +1,13 @@
 import Profile from './Profile';
 import React from 'react';
 import { connect } from 'react-redux';
-import { setProfileActionCreator } from '../../../redux/profile-reducer';
+import { getProfileThunkCreator } from '../../../redux/profile-reducer';
 import Prelouder from './../../Prelouder/Prelouder';
 import {
     useLocation,
     useNavigate,
     useParams,
 } from "react-router-dom";
-import { getProfileAPI } from '../../../api';
 
 // wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
 function withRouter(Component) {
@@ -30,19 +29,13 @@ function withRouter(Component) {
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
-        getProfileAPI(this.props.router.params.id)
-            .then((data) => {
-                this.props.setProfile(data);
-            })
+        this.props.getProfile(this.props.router.params.id)
     }
 
     componentDidUpdate(props, prevState) {
 
         if (Number(this.props.router.params.id) !== this.props.profile?.id) {
-            getProfileAPI(this.props.router.params.id)
-                .then((data) => {
-                    this.props.setProfile(data);
-                })
+            this.props.getProfile(this.props.router.params.id);
         }
     }
 
@@ -68,8 +61,8 @@ let mapStateToProps = (state) => {
 }
 let mapDispatchToProps = (dispatch) => {
     return {
-        setProfile: (profile) => {
-            dispatch(setProfileActionCreator(profile))
+        getProfile: (id) => {
+            dispatch(getProfileThunkCreator(id))
         },
     }
 }
