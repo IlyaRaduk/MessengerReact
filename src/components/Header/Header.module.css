@@ -1,17 +1,19 @@
-.headerWrapper{
+.headerWrapper {
     background-color: #FFFFFF;
 }
-.header{
+
+.header {
     display: flex;
     justify-content: space-between;
-    
+
     align-items: center;
     height: 48px;
 }
-.title{
+
+.title {
     color: white;
-    background-color:#447bba; ;
+    background-color: #447bba;
+    ;
     text-transform: uppercase;
     font-size: 28px;
 }
-

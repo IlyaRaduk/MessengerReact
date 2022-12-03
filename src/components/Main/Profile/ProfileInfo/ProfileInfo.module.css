@@ -1,13 +1,14 @@
-.profileInfo{
+.profileInfo {
     display: flex;
     justify-content: space-between;
-    
+
     background-color: white;
     padding: 20px 20px 20px 20px;
     border-radius: 20px;
     margin-bottom: 20px;
 }
-.avatar{
+
+.avatar {
     background-color: #edeef0;
     width: 230px;
     height: 230px;
@@ -16,26 +17,31 @@
     align-items: center;
     justify-content: center;
 }
-.photo{
+
+.photo {
     width: 200px;
     height: 200px;
     border-radius: 50%;
 }
-.discription{
+
+.discription {
     flex: 1 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
 }
-.name{
+
+.name {
     font-size: 55px;
     font-weight: bold;
 }
-.city{
+
+.city {
     font-size: 35px;
 }
-.status{
+
+.status {
     font-size: 25px;
     font-style: italic;
 }

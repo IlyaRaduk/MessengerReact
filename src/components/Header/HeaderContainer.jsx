@@ -2,11 +2,11 @@ import Header from "./Header";
 import React from 'react';
 import { connect } from 'react-redux';
 import axios from "axios";
-import { setUserDataActionCreator,authActionCreator,unAuthActionCreator } from "../../redux/auth-reducer";
+import { setUserDataActionCreator, authActionCreator, unAuthActionCreator } from "../../redux/auth-reducer";
 
 class HeaderContainer extends React.Component {
 
-    componentDidMount(){
+    componentDidMount() {
         // axios.get('https://API.com/auth/me',{
         //     withCredentials:true,
         // })
@@ -18,35 +18,35 @@ class HeaderContainer extends React.Component {
 
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <Header isAuth={this.props.isAuth}
-            auth={this.props.auth}
-            unAuth={this.props.unAuth}/> 
+                auth={this.props.auth}
+                unAuth={this.props.unAuth} />
         )
     }
 
 }
 
-let mapStateToProps = (state)=>{
-    return{
+let mapStateToProps = (state) => {
+    return {
         isAuth: state.auth.isAuth,
     }
 }
-let mapDispatchToProps = (dispatch)=>{
-    return{
-        setUserData:(userId,email,login)=>{
-            dispatch(setUserDataActionCreator(userId,email,login))
+let mapDispatchToProps = (dispatch) => {
+    return {
+        setUserData: (userId, email, login) => {
+            dispatch(setUserDataActionCreator(userId, email, login))
         },
-        auth:()=>{
-          
+        auth: () => {
+
             dispatch(authActionCreator())
         },
-        unAuth:()=>{
-           
+        unAuth: () => {
+
             dispatch(unAuthActionCreator())
         },
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(HeaderContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);

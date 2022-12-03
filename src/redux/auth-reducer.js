@@ -1,59 +1,59 @@
 
 
-let initialState ={
-  userId:null,
-  email:null,
-  login:null,
-  isAuth:false,
+let initialState = {
+  userId: null,
+  email: null,
+  login: null,
+  isAuth: false,
 }
 
-const authReducer =(state=initialState,action)=>{
-   switch(action.type){
+const authReducer = (state = initialState, action) => {
+  switch (action.type) {
     case 'SET_USER_DATA':
       return {
         ...state,
         ...action.data,
-        isAuth:true,
+        isAuth: true,
       }
-      case 'AUTH':
+    case 'AUTH':
       return {
         ...state,
-        isAuth:true,
+        isAuth: true,
       }
-      case 'UNAUTH':
+    case 'UNAUTH':
       return {
         ...state,
-        isAuth:false,
+        isAuth: false,
       }
-    default: 
+    default:
       return state;
-   }
+  }
 }
 
 export default authReducer;
 
-export const setUserDataActionCreator = (userId,email,login)=> {
+export const setUserDataActionCreator = (userId, email, login) => {
   return {
-    type:'SET_USER_DATA',
-    data:{
+    type: 'SET_USER_DATA',
+    data: {
       userId,
       email,
       login,
     },
   }
 }
-export const authActionCreator = ()=> {
+export const authActionCreator = () => {
   return {
-    type:'AUTH',
+    type: 'AUTH',
   }
 }
-export const unAuthActionCreator = ()=> {
+export const unAuthActionCreator = () => {
   return {
-    type:'UNAUTH',
+    type: 'UNAUTH',
   }
 }
 
 
 
 
-  
+

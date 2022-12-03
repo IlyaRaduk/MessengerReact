@@ -1,10 +1,11 @@
-.about{
-  flex:  1 0 auto;
+.about {
+  flex: 1 0 auto;
   background-color: white;
   padding: 20px 20px 20px 20px;
   border-radius: 20px;
 
 }
-.about span{
+
+.about span {
   font-weight: bold;
 }

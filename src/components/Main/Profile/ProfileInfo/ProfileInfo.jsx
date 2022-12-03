@@ -1,13 +1,13 @@
 import classes from './ProfileInfo.module.css';
 
 
-let ProfileInfo=(props)=>{
+let ProfileInfo = (props) => {
 
-    return(
+    return (
 
         <div className={classes.profileInfo}>
             <div className={classes.avatar}>
-                <img src={props.profile.photoUrl} className={classes.photo}alt='photo' />
+                <img src={props.profile.photoUrl} className={classes.photo} alt='photo' />
             </div>
             <div className={classes.discription}>
                 <div className={classes.name}>

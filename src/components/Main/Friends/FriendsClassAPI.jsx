@@ -1,30 +1,28 @@
 import React from 'react';
 import Friends from './Friends';
 import axios from 'axios';
+import { getUsersAPI } from '../../../api';
 
 class FriendsClassAPI extends React.Component {
 
     selectedPages(page) {
         this.props.togleIsFetching(true)
         this.props.selectedPage(page)
-        axios.get('http://192.168.100.3:3005/users/' + page)
-            .then(response => {
+        getUsersAPI(page)
+            .then(data => {
                 this.props.togleIsFetching(false)
-                let users = response;
-                this.props.setUsers(users.data.users)
+                this.props.setUsers(data.users)
             })
     }
 
     componentDidMount() {
         this.props.togleIsFetching(true)
         this.props.selectedPage(1);
-        axios.get('http://192.168.100.3:3005/users/1')
-            .then(response => {
+        getUsersAPI(1)
+            .then(data => {
                 this.props.togleIsFetching(false)
-                let users = response;
-                this.props.setUsers(users.data.users)
-                this.props.setTotalUsersCount(users.data.totalUsersCount);
-
+                this.props.setUsers(data.users)
+                this.props.setTotalUsersCount(data.totalUsersCount);
             })
 
     }

@@ -1,5 +1,5 @@
 import Messages from './Messages';
-import { addMessageActionCreator, changeLettersMessageActionCreator } from '../../../../redux/dialogs-reducer'; 
+import { addMessageActionCreator, changeLettersMessageActionCreator } from '../../../../redux/dialogs-reducer';
 import { connect } from 'react-redux';
 
 // function MessagesContainer(props){
@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 //     }
 //     let changeLetters = (text)=>{
 //       props.store.dispatch(changeLettersMessageActionCreator(text));
-      
+
 //     }
 //     return(
 //         <>
@@ -22,21 +22,21 @@ import { connect } from 'react-redux';
 //     )
 // }
 
-const mapStateToProps = (state)=>{
-  return{
+const mapStateToProps = (state) => {
+  return {
     value: state.dialogsPage.newMessageText,
     messages: state.dialogsPage.messages,
   }
 }
-const mapDispatchToProps = (dispatch)=>{
-  return{
-    addMessage: ()=>{dispatch(addMessageActionCreator())},
-    changeLetters:(text)=>{ dispatch(changeLettersMessageActionCreator(text))},
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addMessage: () => { dispatch(addMessageActionCreator()) },
+    changeLetters: (text) => { dispatch(changeLettersMessageActionCreator(text)) },
   }
 }
 
 
 
-const MessagesContainer = connect(mapStateToProps,mapDispatchToProps)(Messages);
+const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(Messages);
 
 export default MessagesContainer;

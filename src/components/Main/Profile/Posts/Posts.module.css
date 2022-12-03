@@ -1,5 +1,4 @@
-
-.areaWrapper{
+.areaWrapper {
   background-color: white;
   padding: 20px 20px 20px 20px;
   border-radius: 20px;
@@ -7,14 +6,14 @@
   align-items: center;
   justify-content: space-between;
 }
-.textArea{
- background-color: white;
- border: 0;
- width: 80%;
- height: 40px;
- resize: none;
- display: flex;
- justify-content: center;
- align-items: center;
-}
 
+.textArea {
+  background-color: white;
+  border: 0;
+  width: 80%;
+  height: 40px;
+  resize: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
