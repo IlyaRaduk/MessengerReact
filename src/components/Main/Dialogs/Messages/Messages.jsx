@@ -4,8 +4,8 @@ import React from 'react';
 
 function Messages(props){
     const createMessages = (data)=>{
-        return data.map((e)=>{
-            return <div>{e}</div>
+        return data.map((e,index)=>{
+            return <div key={index}>{e}</div>
         })
     }
     let newMessageElement = React.createRef();

@@ -6,17 +6,19 @@ import {Route,Routes} from 'react-router-dom';
 import About from './About/About';
 import FriendsContainer from './Friends/FriendsContainer';
 
-function Main(props){
+function Main(){
     return(
-        <main className={classes.main}>
-            <Navigation/>
-            <Routes>
-                <Route path="/profile/:id" element={<ProfileContainer/>} />
-                <Route path="/dialogs/*" element={<Dialogs/>}/>
-                <Route path="/friends/*" element={<FriendsContainer />}/>
-                <Route path="/about" element={<About />}/>
-            </Routes>
-        </main>
+        <div className='container'>
+            <main className={classes.main}>
+                <Navigation/>
+                <Routes>
+                    <Route path="/profile/:id" element={<ProfileContainer/>} />
+                    <Route path="/dialogs/*" element={<Dialogs/>}/>
+                    <Route path="/friends/*" element={<FriendsContainer />}/>
+                    <Route path="/about" element={<About />}/>
+                </Routes>
+            </main>
+        </div>
     )
 }
 export default Main;

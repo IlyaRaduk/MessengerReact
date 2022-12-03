@@ -1,17 +1,17 @@
 import classes from './DialogItem.module.css';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 
-function DialogItem(props){
+function DialogItem(props) {
 
-    const createDialogItem = (data)=>{
-        return data.map((e)=>{
-            return <li className={classes.item}><NavLink to={"/dialogs/"+e.id}>{e.name}</NavLink ></li>
+    const createDialogItem = (data) => {
+        return data.map((e) => {
+            return <li key={e.id} className={classes.item}><NavLink to={"/dialogs/" + e.id}>{e.name}</NavLink ></li>
         })
     }
-    return( 
+    return (
         <>
-           {createDialogItem(props.dialogsItems)}
+            {createDialogItem(props.dialogsItems)}
         </>
     )
 }

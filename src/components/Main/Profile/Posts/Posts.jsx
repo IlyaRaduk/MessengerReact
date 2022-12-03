@@ -1,6 +1,7 @@
 import classes from './Posts.module.css';
 import Post from './Post/Post';
 import React from 'react';
+import Btn from './../../../Button/Btn'
 
 function Posts(props){
   let newPostElement = React.createRef();
@@ -17,11 +18,11 @@ function Posts(props){
   
     return(
         <section className={classes.posts}>
-          <textarea onChange={onChangeLetters} ref={newPostElement}  value={props.newPostText} ></textarea>
-          <button onClick={onAddPost}>add post</button>
-          <button>remove</button>
-        <p className={classes.text}>Основной контент</p>
-        <Post  postsItems={props.postsItems}/>
+          <div className={classes.areaWrapper}>
+            <textarea placeholder="Что у вас нового?" className={classes.textArea} onChange={onChangeLetters} ref={newPostElement}  value={props.newPostText} ></textarea>
+            <Btn setClick={onAddPost} title={'Add post'} isActive={true}/>
+          </div>
+          <Post  postsItems={props.postsItems}/>
       </section>
     )
 }

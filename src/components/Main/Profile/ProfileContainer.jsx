@@ -8,6 +8,7 @@ import {
     useNavigate,
     useParams,
 } from "react-router-dom";
+
 // wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
 function withRouter(Component) {
     function ComponentWithRouterProp(props) {
@@ -26,7 +27,7 @@ function withRouter(Component) {
 }
 
 class ProfileContainer extends React.Component{
-
+ 
     getUser(id){
         const USERS = [
             {id:1, photoUrl:'https://www.iphones.ru/wp-content/uploads/2020/05/1-1-4.jpg',followed:false,name:'Ilya',status:'I am a boss',location:{city:'Minsk',country:'Belarus'}},
@@ -52,25 +53,36 @@ class ProfileContainer extends React.Component{
             {id:21, photoUrl:'https://handcraftguide.com/sites/default/files/styles/original___water/public/sketchingforkids1handcraftguide.com__0.jpg?itok=CiUYaUmE',followed:false,name:'QQQQQQQQ',status:'I am a boss2followed:false,',location:{city:'Minsk',country:'Belarus'}},
         ]
 
-        return USERS[id];
+        return USERS[id-1];
         
     }
     componentDidMount(){
-        console.log(this.props)
-        let profile = this.getUser(this.props.router.params.id-1);
+
+        let profile = this.getUser(this.props.router.params.id);
         this.props.setProfile(profile);
+        
     }
+    componentDidUpdate(props,prevState){
+     
+        if(Number(this.props.router.params.id) !== this.props.profile?.id) {
+            this.props.setProfile(this.getUser(this.props.router.params.id));
+        }
+    }
+   
 
     render(){
         if (this.props.profile===null){
             return (
                 <Prelouder/>
             )
+        } else
+        {
+            return(
+                <Profile profile={this.props.profile}/>
+     
+           
+            )
         }
-        else
-        return(
-            <Profile profile={this.props.profile}/>
-        )
 
     }
 

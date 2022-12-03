@@ -1,52 +1,52 @@
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import classes from './Friends.module.css';
 import Prelouder from '../../Prelouder/Prelouder';
+import Btn from '../../Button/Btn';
 
-function Friends(props){
+function Friends(props) {
 
-    let pageCount = Math.ceil(props.totalUsersCount/props.pageSize);
+    let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
-    for (let i=1;i<=pageCount;i++){
+    for (let i = 1; i <= pageCount; i++) {
         pages.push(i);
     }
-    
-    return(
-        <>  
-            
-            <div className={classes.userList}>
-                <div>
-                    <ul className={classes.pageList}>
-                        {pages.map((e)=>{
-                            return <li onClick={()=>{props.selectedPages(e)}} className={props.currentPage===e && classes.selectedPage}>{e}</li>
-                        })}
-                    
-                    </ul>
-                </div>
 
-                {props.isFetching?<Prelouder/>:<>{props.users.map((e)=>{
-                    return <div key={e.id} >
-                            <div>
-                                <div>
-                                   
-                                <NavLink to={"/profile"+"/"+e.id}> <img src={e.photoUrl} alt="" className={classes.userPhoto} /></NavLink >
-                                </div>
-                                {e.followed?<button onClick={()=>{props.unfollow(e.id)}}>Follow</button>:<button onClick={()=>{props.follow(e.id)}}>Unfollow</button>}
-                            </div>
-                            <div>
-                                <div>
-                                    <p>{e.name}</p>
-                                    <p>{e.status}</p>
-                                </div>
-                                <div>
-                                    <p>{e.location.city}</p>
-                                    <p>{e.location.country}</p>
-                                </div>
-                            </div>
-                        </div>
+    return (
+        <>
+            <div className={classes.userList}>
+
+                <ul className={classes.pageList}>
+                    {pages.map((e) => {
+                        if (props.currentPage === e) {
+                            return <li key={e} onClick={() => { props.selectedPages(e) }} className={classes.selectedPage}>{e}</li>
+                        } else
+                            return <li key={e} onClick={() => { props.selectedPages(e) }}>{e}</li>
                     })}
+
+                </ul>
+
+                {props.isFetching ? <div className={classes.prelouder}><Prelouder /></div> : <>{props.users.map((e) => {
+                    return <div className={classes.user} key={e.id} >
+
+                        <div className={classes.user__avatar}>
+
+                            <NavLink to={"/profile" + "/" + e.id}> <img src={e.photoUrl} alt="" className={classes.user__photo} /></NavLink >
+                        </div>
+
+                        <div className={classes.user__info}>
+
+                            <NavLink to={"/profile" + "/" + e.id}><p className={classes.user__name}>{e.name}</p></NavLink >
+                            <p className={classes.user__city}>{e.location.city}</p>
+                            <p className={classes.user__country}>{e.location.country}</p>
+                            <p className={classes.user__status}>{e.status}</p>
+
+                        </div>
+                        {e.followed ? <Btn isActive={true} setClick={() => props.unfollow(e.id)} title={'Follow'} /> : <Btn isActive={false} setClick={() => props.follow(e.id)} title={'Unfollow'} />}
+                    </div>
+                })}
                 </>}
-                
-                
+
+
             </div>
         </>
     )

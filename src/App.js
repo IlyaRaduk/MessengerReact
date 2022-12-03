@@ -1,12 +1,12 @@
 import './App.css'
-import Header from './components/Header/Header';
+import HeaderContainer from './components/Header/HeaderContainer';
 import Main from './components/Main/Main';
 
-function App(props) {
+function App() {
   return (
    
     <div className="App" >
-      <Header/>
+      <HeaderContainer/>
       <Main />
     </div>
 

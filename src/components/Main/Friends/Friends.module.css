@@ -1,26 +1,90 @@
-.friends{
-  width: 100%;
-  background-color: darkolivegreen;
-  color: black;
+.userList {
+  background-color: #FFFFFF;
+  flex: 1 0 auto;
+  padding: 0px 20px 0 20px;
+  border-radius: 20px;
 }
-.userList{
+
+.userList {
   display: flex;
   flex-direction: column;
+
+
 }
-.userPhoto{
-  width: 200px;
-  height: 200px;
-}
-.pageList{
+
+.pageList {
+  margin-top: 20px;
+  margin-bottom: 10px;
   list-style-type: none;
   display: flex;
+  font-size: 20px;
+  align-items: center;
+  border: rgba(0, 0, 0, 0.12) 1px solid;
+  border-radius: 18px;
 }
-.pageList li{
- margin-left: 5px;
+
+.pageList li {
+  margin-left: 10px;
+  line-height: 30px;
+  transition: all linear 0.1s;
 }
-.selectedPage{
-  color:red;
+
+.pageList li:hover {
+  font-size: 30px;
 }
-.pageList li:hover{
+
+.selectedPage {
+  color: #2688eb;
+
+}
+
+.pageList li:hover {
   cursor: pointer;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  border-bottom: rgba(0, 0, 0, 0.12) 1px solid;
+  padding: 15px 0;
+}
+
+.user__photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.user__info {
+  padding: 10px 0 10px 50px;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  color: #626d7a;
+}
+
+.user__info a {
+  text-decoration: none;
+}
+
+.user__info a:hover {
+  text-decoration: underline;
+}
+
+.user__name {
+  color: #2a5885;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.user__status {
+  padding-top: 5px;
+  font-style: italic;
+}
+
+.prelouder {
+  display: flex;
+  justify-content: center;
 }

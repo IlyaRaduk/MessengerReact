@@ -1,0 +1,29 @@
+.btn{
+    margin-right: 15px;
+    background-color: #e5ebf1;
+    width: 100px;
+    height: 32px;
+    border: 0;
+    border-radius: 8px;
+    transition: all linear 0.1s;
+    cursor: pointer;
+    color: #2688eb;
+}
+.btnActive{
+    margin-right: 15px;
+    background-color:#447bba; 
+    width: 100px;
+    height: 32px;
+    border: 0;
+    border-radius: 8px;
+    transition: all linear 0.1s;
+    cursor: pointer;
+    color: white;
+}
+.btnActive:hover{
+    background-color:#3989e3; 
+}
+
+.btn:hover{
+    background-color:#bdc8d6; 
+}

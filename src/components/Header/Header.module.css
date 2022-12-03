@@ -1,8 +1,17 @@
-.header{
-    background-color: red;
+.headerWrapper{
+    background-color: #FFFFFF;
 }
-
-.text{
-    color:rgb(0, 0, 0)
+.header{
+    display: flex;
+    justify-content: space-between;
+    
+    align-items: center;
+    height: 48px;
+}
+.title{
+    color: white;
+    background-color:#447bba; ;
+    text-transform: uppercase;
+    font-size: 28px;
 }
 
