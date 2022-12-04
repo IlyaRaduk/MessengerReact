@@ -5,6 +5,7 @@ import Dialogs from './Dialogs/Dialogs';
 import { Route, Routes } from 'react-router-dom';
 import About from './About/About';
 import FriendsContainer from './Friends/FriendsContainer';
+import LoginContainer from '../Login/LoginContainer';
 
 function Main() {
     return (
@@ -16,6 +17,7 @@ function Main() {
                     <Route path="/dialogs/*" element={<Dialogs />} />
                     <Route path="/friends/*" element={<FriendsContainer />} />
                     <Route path="/about" element={<About />} />
+                    <Route path="/login" element={<LoginContainer />} />
                 </Routes>
             </main>
         </div>

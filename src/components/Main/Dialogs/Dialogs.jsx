@@ -2,7 +2,7 @@ import classes from './Dialogs.module.css';
 import { Route, Routes } from 'react-router-dom';
 import MessagesContainer from './Messages/MessagesContainer';
 import DialogsListContainer from './DialogsList/DialogsListContainer';
-
+import WithAuthRedirect from '../../../hoc/WithAuthRedirect';
 
 
 
@@ -23,4 +23,4 @@ function Dialogs(props) {
 
     )
 }
-export default Dialogs
+export default WithAuthRedirect(Dialogs)

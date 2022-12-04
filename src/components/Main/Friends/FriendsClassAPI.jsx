@@ -19,7 +19,7 @@ class FriendsClassAPI extends React.Component {
                 unFollow={this.props.unFollow}
                 follow={this.props.follow}
                 isFetching={this.props.isFetching}
-
+                isAuth={this.props.isAuth}
             />
         )
     }

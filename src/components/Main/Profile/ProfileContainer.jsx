@@ -2,12 +2,13 @@ import Profile from './Profile';
 import React from 'react';
 import { connect } from 'react-redux';
 import { getProfileThunkCreator } from '../../../redux/profile-reducer';
-import Prelouder from './../../Prelouder/Prelouder';
+import Prelouder from './../../common/Prelouder/Prelouder';
 import {
     useLocation,
     useNavigate,
     useParams,
 } from "react-router-dom";
+import WithAuthRedirect from '../../../hoc/WithAuthRedirect';
 
 // wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
 function withRouter(Component) {
@@ -67,6 +68,6 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-let WithUrlProfileContainer = withRouter(ProfileContainer);
+let WithUrlProfileContainer = withRouter(WithAuthRedirect(ProfileContainer));
 
 export default connect(mapStateToProps, mapDispatchToProps)(WithUrlProfileContainer);

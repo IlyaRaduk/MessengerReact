@@ -1,7 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import classes from './Friends.module.css';
-import Prelouder from '../../Prelouder/Prelouder';
+import Prelouder from './../../common/Prelouder/Prelouder';
 import Btn from '../../Button/Btn';
+
 
 function Friends(props) {
 
@@ -10,6 +11,8 @@ function Friends(props) {
     for (let i = 1; i <= pageCount; i++) {
         pages.push(i);
     }
+
+
 
     return (
         <>
