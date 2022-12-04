@@ -1,7 +1,7 @@
 import classes from './Posts.module.css';
 import Post from './Post/Post';
 import React from 'react';
-import Btn from './../../../Button/Btn'
+import Btn from './../../../common/Button/Btn'
 
 function Posts(props) {
   let newPostElement = React.createRef();

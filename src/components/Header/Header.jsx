@@ -1,7 +1,7 @@
 
 import classes from './Header.module.css';
 import { NavLink } from 'react-router-dom';
-import Btn from '../Button/Btn';
+import Btn from './../common/Button/Btn';
 
 function Header(props) {
     
