@@ -9,13 +9,10 @@ async function run() {
         // взаимодействие с базой данных
         const db = mongoClient.db("usersDb");
         const users = db.collection("usersCol");
-        await users.insertOne({ name: 'Ilya', age: 8 });
-        const user = await users.findOne({name:'Ilya'})
+        const user = await users.find().toArray();
         console.log(user);
         // выполняем пинг для проверки подключения
-        const result = await db.command({ ping: 1 });
         console.log("Подключение с сервером успешно установлено");
-        console.log(result);
     } catch (err) {
         console.log(err);
     } finally {
