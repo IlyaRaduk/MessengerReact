@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL:'http://192.168.100.3:3005/',
+    baseURL: 'http://192.168.100.3:3005/',
 })
 
 export let followAPI = (id) => {
@@ -31,3 +31,14 @@ export let getProfileAPI = (id) => {
             return (response.data);
         })
 }
+export let setStatusAPI = (id, status) => {
+    return instance.put('status/' + id, { status: status, })
+        .then((response) => {
+            return (response.data)
+        })
+}
+
+// export let setStatusAPI = (id, status) => {
+//     return fetch('http://192.168.100.3:3005/status/'+id,{method:'PUT',body:JSON.stringify({status:status}), headers:{ 'content-type':'application/json'}})
+//     .then(res=>res)
+// }

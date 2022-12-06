@@ -1,10 +1,10 @@
 import classes from './ProfileInfo.module.css';
-
+import Status from './Status/Status';
 
 let ProfileInfo = (props) => {
 
-    return (
-
+    return ( 
+        
         <div className={classes.profileInfo}>
             <div className={classes.avatar}>
                 <img src={props.profile.photoUrl} className={classes.photo} alt='photo' />
@@ -16,9 +16,7 @@ let ProfileInfo = (props) => {
                 <div className={classes.city}>
                     {props.profile.location.city}
                 </div>
-                <div className={classes.status}>
-                    {props.profile.status}
-                </div>
+                <Status setStatus={props.setStatus} status={props.profile.status} id={props.profile.id}/>
             </div>
         </div>
 

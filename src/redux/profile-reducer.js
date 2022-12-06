@@ -1,4 +1,5 @@
-import { getProfileAPI } from "../api";
+
+import { getProfileAPI, setStatusAPI } from "../api";
 
 let initialState = {
   profile: null,
@@ -43,6 +44,14 @@ const profileReducer = (state = initialState, action) => {
         profile: action.profile,
       }
     }
+    case 'SET_STATUS': {
+      if (action.resaultCode) {
+        return {
+          ...state,
+          profile: { ...state.profile, status: action.text },
+        }
+      }
+    }
     default: {
       return state;
     }
@@ -77,4 +86,21 @@ export const getProfileThunkCreator = (id) => (dispatch) => {
     .then((data) => {
       dispatch(setProfileActionCreator(data));
     })
+}
+
+export const setStatusThunkCreator = (id, text) => (dispatch) => {
+  setStatusAPI(id, text)
+    .then((resaultCode) => {
+      dispatch(setStatusActionCreator(resaultCode, text));
+    })
+}
+
+
+
+export const setStatusActionCreator = (resaultCode, text) => {
+  return {
+    type: 'SET_STATUS',
+    text: text,
+    resaultCode,
+  }
 }

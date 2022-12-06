@@ -1,7 +1,7 @@
 import Profile from './Profile';
 import React from 'react';
 import { connect } from 'react-redux';
-import { getProfileThunkCreator } from '../../../redux/profile-reducer';
+import { getProfileThunkCreator,setStatusThunkCreator } from '../../../redux/profile-reducer';
 import Prelouder from './../../common/Prelouder/Prelouder';
 import {
     useLocation,
@@ -48,7 +48,7 @@ class ProfileContainer extends React.Component {
             )
         } else {
             return (
-                <Profile profile={this.props.profile} />
+                <Profile profile={this.props.profile} setStatus={this.props.setStatus} />
             )
         }
 
@@ -66,6 +66,9 @@ let mapDispatchToProps = (dispatch) => {
         getProfile: (id) => {
             dispatch(getProfileThunkCreator(id))
         },
+        setStatus:(id,text)=>{
+            dispatch(setStatusThunkCreator(id,text))
+        }
     }
 }
 
