@@ -8,12 +8,25 @@ class Status extends React.Component {
             inputValue: this.props.status,
         };
     }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.allowsEditStatus !== prevProps.allowsEditStatus && this.props.allowsEditStatus===true) {
+            this.setState({
+                editMode: true,
+            })
+        }
+    }
+
     activatedEditMode() {
-        this.setState({
-            editMode: true,
-        })
+        this.props.checkStatusOwner(this.props.id);
+        if (this.props.allowsEditStatus) {
+            this.setState({
+                editMode: true,
+            })
+        }
     }
     deActivatedEditMode() {
+        this.props.blockStatusOwner();
         this.setState({
             editMode: false,
         })
@@ -42,7 +55,7 @@ class Status extends React.Component {
                 }
                 {this.state.editMode &&
                     <div>
-                        <input type="text" onChange={(e) => { this.onChangeInput(e) }} autoFocus={true} onBlur={this.deActivatedEditMode.bind(this)} value={this.state.inputValue} />
+                        <input className={classes.status} type="text" onChange={(e) => { this.onChangeInput(e) }} autoFocus={true} onBlur={this.deActivatedEditMode.bind(this)} value={this.state.inputValue} />
                     </div>
                 }
             </div>

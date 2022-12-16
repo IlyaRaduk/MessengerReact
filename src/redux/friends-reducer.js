@@ -1,4 +1,5 @@
 import { followAPI, unfollowAPI, getUsersAPI } from "../api";
+import { unAuthThunkCreator } from "./auth-reducer";
 
 let initialState = {
   users: [
@@ -130,7 +131,7 @@ export const selectedPagesThunkCreator = (page) => (dispatch) => {
       dispatch(togleIsFetching(false));
       dispatch(setUsersActionCreator(data.users));
       dispatch(setTotalUsersCount(data.totalUsersCount));
-    })
+    },(error)=> dispatch(unAuthThunkCreator()));
 }
 
 

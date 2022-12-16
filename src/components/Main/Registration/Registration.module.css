@@ -1,0 +1,67 @@
+
+.registration{
+    background-color: white;
+    padding: 20px 20px 20px 20px;
+    border-radius: 20px;
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 100%;
+    align-items: center;
+}
+.email{
+    margin-top: 10px;
+    height: 28px;
+    border-radius: 5px;
+    border: 1px solid #999b9e;
+    padding: 5px;
+    width: 300px;
+}
+.password{
+    margin-top: 10px;
+    height: 28px;
+    border-radius: 5px;
+    border: 1px solid #999b9e;
+    padding: 5px;
+    width: 300px;
+}
+.error{
+    font-size: 18px;
+    color: red;
+    margin-top: 10px;
+}
+.submit{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    height: 32px;
+    border: 0;
+    border-radius: 8px;
+    transition: all linear 0.1s;
+    cursor: pointer;
+    color: white;
+    background-color: green;
+}
+
+.submit:hover {
+    background-color: rgb(11, 151, 11);
+}
+.email:focus {
+    border: 0px;
+    outline : 2px solid #3989e3;
+}
+.password:focus {
+    border: 0px;
+    outline : 2px solid #3989e3;
+}

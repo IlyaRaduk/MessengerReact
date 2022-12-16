@@ -1,35 +1,23 @@
 
-import { getProfileAPI, setStatusAPI } from "../api";
+import { getProfileAPI, setStatusAPI, addPostsAPI, checkStatusOwnerAPI } from "../api";
+import { unAuthThunkCreator } from "./auth-reducer";
 
 let initialState = {
   profile: null,
   postsItems: [
-    { id: 1, name: "Ilya", post: "Мой первый пост!!!", like: 96 },
-    { id: 2, name: "Polina", post: "Это пост от Полины эй!", like: 28 },
-    { id: 3, name: "Vanya", post: "третий пост", like: 49 },
-    { id: 4, name: "Roma", post: "АЙТИПУТЬ САМУРАЯ", like: 4 },
-    { id: 5, name: "Ecaterina", post: "Привет как дела?", like: 2 },
-    { id: 6, name: "Georgii", post: "assigned a value but", like: 1 },
   ],
   newPostText: '',
+  allowsEditStatus: null,
 };
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD-POST': {
-      let newPost = {
-        id: state.postsItems.length + 1,
-        name: 'Ilya',
-        post: state.newPostText,
-        like: 0,
-      }
-      let copyState = {
+      return {
         ...state,
-        postsItems: [...(state.postsItems)],
-      };
-      copyState.postsItems.push(newPost);
-      copyState.newPostText = '';
-      return copyState;
+        postsItems: [...action.posts].reverse(),
+        newPostText:''
+      }
     }
     case 'CHANGE-LETTERS': {
       let copyState = {
@@ -42,6 +30,7 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         profile: action.profile,
+        postsItems: [...action.profile.posts].reverse(),
       }
     }
     case 'SET_STATUS': {
@@ -50,6 +39,18 @@ const profileReducer = (state = initialState, action) => {
           ...state,
           profile: { ...state.profile, status: action.text },
         }
+      }
+    }
+    case 'CHECK_STATUS_OWNER': {
+      return {
+        ...state,
+        allowsEditStatus: action.allowsEdit,
+      }
+    }
+    case 'BLOCK_STATUS_OWNER': {
+      return {
+        ...state,
+        allowsEditStatus: false,
       }
     }
     default: {
@@ -68,9 +69,10 @@ export const setProfileActionCreator = (profile) => {
   }
 }
 
-export const addPostActionCreator = () => {
+export const addPostActionCreator = (posts) => {
   return {
     type: 'ADD-POST',
+    posts,
   }
 }
 
@@ -85,7 +87,7 @@ export const getProfileThunkCreator = (id) => (dispatch) => {
   getProfileAPI(id)
     .then((data) => {
       dispatch(setProfileActionCreator(data));
-    })
+    }, (error) => dispatch(unAuthThunkCreator()));
 }
 
 export const setStatusThunkCreator = (id, text) => (dispatch) => {
@@ -95,7 +97,25 @@ export const setStatusThunkCreator = (id, text) => (dispatch) => {
     })
 }
 
+export const checkStatusOwnerThunkCreator = (id) => (dispatch) => {
+  checkStatusOwnerAPI(id)
+    .then((resaultCode) => {
+      dispatch(checkStatusOwnerActionCreator(resaultCode));
+    })
+}
 
+export const checkStatusOwnerActionCreator = (resaultCode) => {
+  return {
+    type: 'CHECK_STATUS_OWNER',
+    allowsEdit: resaultCode,
+  }
+}
+export const blockStatusOwnerActionCreator = () => {
+  return {
+    type: 'BLOCK_STATUS_OWNER',
+    allowsEdit: false,
+  }
+}
 
 export const setStatusActionCreator = (resaultCode, text) => {
   return {
@@ -104,3 +124,12 @@ export const setStatusActionCreator = (resaultCode, text) => {
     resaultCode,
   }
 }
+
+
+export const addPostsThunkCreator = (text, id) => (dispatch) => {
+  addPostsAPI(text, id)
+    .then((data) => {
+      dispatch(addPostActionCreator(data));
+    });
+}
+

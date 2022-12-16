@@ -7,7 +7,8 @@ function Posts(props) {
   let newPostElement = React.createRef();
 
   let onAddPost = () => {
-    props.addPost();
+    let text = newPostElement.current.value;
+    props.addPost(text, props.profileId);
   }
 
   let onChangeLetters = () => {
@@ -15,14 +16,14 @@ function Posts(props) {
     props.changeLetters(text);
   }
 
-
   return (
     <section className={classes.posts}>
       <div className={classes.areaWrapper}>
         <textarea placeholder="Что у вас нового?" className={classes.textArea} onChange={onChangeLetters} ref={newPostElement} value={props.newPostText} ></textarea>
         <Btn setClick={onAddPost} title={'Add post'} isActive={true} />
       </div>
-      <Post postsItems={props.postsItems} />
+
+      {props.postsItems.length > 0 ? <Post postsItems={props.postsItems} /> : <></>}
     </section>
   )
 }

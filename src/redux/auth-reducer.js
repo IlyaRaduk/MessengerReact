@@ -1,10 +1,8 @@
-
+import { registrationNewAccount } from "../api";
+import { login } from "../api";
 
 let initialState = {
-  userId: null,
-  email: null,
-  login: null,
-  isAuth: false,
+  isAuth: true,
 }
 
 const authReducer = (state = initialState, action) => {
@@ -12,7 +10,6 @@ const authReducer = (state = initialState, action) => {
     case 'SET_USER_DATA':
       return {
         ...state,
-        ...action.data,
         isAuth: true,
       }
     case 'AUTH':
@@ -32,16 +29,6 @@ const authReducer = (state = initialState, action) => {
 
 export default authReducer;
 
-export const setUserDataActionCreator = (userId, email, login) => {
-  return {
-    type: 'SET_USER_DATA',
-    data: {
-      userId,
-      email,
-      login,
-    },
-  }
-}
 export const authActionCreator = () => {
   return {
     type: 'AUTH',
@@ -52,6 +39,42 @@ export const unAuthActionCreator = () => {
     type: 'UNAUTH',
   }
 }
+
+export const registrationNewAccountThunkCreator = (user) => (dispatch) => {
+  registrationNewAccount(user)
+    .then((resaultCode) => {
+      if (resaultCode) {
+        alert('Пользователь зарегистрирован')
+      }
+      else {
+        alert('Пользователь с таким email уже существует')
+      };
+    })
+}
+
+export const loginThunkCreator = (user) => (dispatch) => {
+  login(user)
+    .then((result) => {
+      if (result) {
+        dispatch(setUserDataActionCreator(result))
+      }
+      else {
+        alert('Либо нету такого эмейл либо неправильный пароль');
+      };
+    })
+}
+
+export const setUserDataActionCreator = () => {
+  return {
+    type: 'SET_USER_DATA',
+  }
+}
+
+export const unAuthThunkCreator = () => (dispatch) => {
+  localStorage.removeItem('token');
+  dispatch(unAuthActionCreator())
+}
+
 
 
 

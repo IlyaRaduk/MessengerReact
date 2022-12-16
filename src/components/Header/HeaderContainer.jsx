@@ -1,7 +1,7 @@
 import Header from "./Header";
 import React from 'react';
 import { connect } from 'react-redux';
-import { setUserDataActionCreator, authActionCreator, unAuthActionCreator } from "../../redux/auth-reducer";
+import { setUserDataActionCreator, authActionCreator, unAuthThunkCreator } from "../../redux/auth-reducer";
 
 class HeaderContainer extends React.Component {
 
@@ -43,7 +43,7 @@ let mapDispatchToProps = (dispatch) => {
         },
         unAuth: () => {
 
-            dispatch(unAuthActionCreator())
+            dispatch(unAuthThunkCreator())
         },
     }
 }

@@ -1,7 +1,7 @@
 import Profile from './Profile';
 import React from 'react';
 import { connect } from 'react-redux';
-import { getProfileThunkCreator,setStatusThunkCreator } from '../../../redux/profile-reducer';
+import { getProfileThunkCreator, setStatusThunkCreator, checkStatusOwnerThunkCreator, blockStatusOwnerActionCreator } from '../../../redux/profile-reducer';
 import Prelouder from './../../common/Prelouder/Prelouder';
 import {
     useLocation,
@@ -34,11 +34,14 @@ class ProfileContainer extends React.Component {
         this.props.getProfile(this.props.router.params.id)
     }
 
-    componentDidUpdate(props, prevState) {
-
-        if (Number(this.props.router.params.id) !== this.props.profile?.id) {
+    componentDidUpdate(prevProps, prevState) {
+        if (!this.props.router.params.id && Number(prevProps.router.params.id)) {
             this.props.getProfile(this.props.router.params.id);
         }
+        if (this.props.router.params.id == true && Number(this.props.router.params.id) !== this.props.profile?.id) {
+            this.props.getProfile(this.props.router.params.id);
+        }
+
     }
 
     render() {
@@ -48,7 +51,7 @@ class ProfileContainer extends React.Component {
             )
         } else {
             return (
-                <Profile profile={this.props.profile} setStatus={this.props.setStatus} />
+                <Profile blockStatusOwner={this.props.blockStatusOwner} allowsEditStatus={this.props.allowsEditStatus} checkStatusOwner={this.props.checkStatusOwner} profile={this.props.profile} setStatus={this.props.setStatus} />
             )
         }
 
@@ -59,6 +62,7 @@ class ProfileContainer extends React.Component {
 let mapStateToProps = (state) => {
     return {
         profile: state.profilePage.profile,
+        allowsEditStatus: state.profilePage.allowsEditStatus,
     }
 }
 let mapDispatchToProps = (dispatch) => {
@@ -66,8 +70,14 @@ let mapDispatchToProps = (dispatch) => {
         getProfile: (id) => {
             dispatch(getProfileThunkCreator(id))
         },
-        setStatus:(id,text)=>{
-            dispatch(setStatusThunkCreator(id,text))
+        setStatus: (id, text) => {
+            dispatch(setStatusThunkCreator(id, text))
+        },
+        checkStatusOwner: (id) => {
+            dispatch(checkStatusOwnerThunkCreator(id))
+        },
+        blockStatusOwner:()=>{
+            dispatch(blockStatusOwnerActionCreator())
         }
     }
 }
