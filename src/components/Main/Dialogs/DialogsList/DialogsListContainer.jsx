@@ -7,5 +7,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const DialogsListContainer = connect(mapStateToProps, null)(DialogsList);
-export default DialogsListContainer;
+export default connect(mapStateToProps, null)(DialogsList);

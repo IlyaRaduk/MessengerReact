@@ -4,15 +4,18 @@ import Prelouder from './../../common/Prelouder/Prelouder';
 import Btn from './../../common/Button/Btn';
 
 
-function Friends(props) {
-
-    let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
+const getTotalPages = (totalUsers, pageSize) => {
+    let pageCount = Math.ceil(totalUsers / pageSize);
     let pages = [];
     for (let i = 1; i <= pageCount; i++) {
         pages.push(i);
     }
+    return pages;
+}
 
+function Friends(props) {
 
+    let pages = getTotalPages(props.totalUsersCount, props.pageSize);
 
     return (
         <>
@@ -25,7 +28,6 @@ function Friends(props) {
                         } else
                             return <li key={e} onClick={() => { props.selectedPages(e) }}>{e}</li>
                     })}
-
                 </ul>
 
                 {props.isFetching ? <div className={classes.prelouder}><Prelouder /></div> : <>{props.users.map((e) => {
@@ -33,7 +35,7 @@ function Friends(props) {
 
                         <div className={classes.user__avatar}>
 
-                            <NavLink to={"/profile" + "/" + e.id}> <img src={e.photoUrl} alt="" className={classes.user__photo} /></NavLink >
+                            <NavLink to={"/profile" + "/" + e.id}> <img src={e.photoUrl} alt="photo" className={classes.user__photo} /></NavLink >
                         </div>
 
                         <div className={classes.user__info}>

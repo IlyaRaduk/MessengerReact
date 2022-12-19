@@ -4,7 +4,7 @@ import LoginForm from './LoginForm/LoginForm';
 import { NavLink } from 'react-router-dom';
 
 let Login = (props) => {
-    if (props.isAuth == true) return <Navigate to={"/profile"} />
+    if (props.isAuth) return <Navigate to={"/profile"} />
     return (
         <div className={classes.login__page}>
             <div className={classes.login} >

@@ -3,7 +3,7 @@ import prelouder from './../../../assets/img/prelouder.gif'
 let Prelouder = (props) => {
     return (
         <div className={classes.prelouder}>
-            <img src={prelouder} alt="" />
+            <img src={prelouder} alt="prelouder" />
         </div>
     )
 }
