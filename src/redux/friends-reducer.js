@@ -1,9 +1,15 @@
 import { followAPI, unfollowAPI, getUsersAPI } from "../api";
 import { unAuthThunkCreator } from "./auth-reducer";
 
+const FOLLOW = 'FOLLOW';
+const UNFOLLOW = 'UNFOLLOW';
+const SET_USERS = 'SET_USERS';
+const SELECTED_PAGE = 'SELECTED_PAGE';
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
+const TOGLE_IS_FETCHING = 'TOGLE_IS_FETCHING';
+
 let initialState = {
-  users: [
-  ],
+  users: [],
   pageSize: 5,
   totalUsersCount: '',
   currentPage: 1,
@@ -12,7 +18,7 @@ let initialState = {
 
 const friendsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'FOLLOW':
+    case FOLLOW:
       return {
         ...state,
         users: state.users.map((e) => {
@@ -23,7 +29,7 @@ const friendsReducer = (state = initialState, action) => {
         })
       }
 
-    case 'UNFOLLOW':
+    case UNFOLLOW:
       return {
         ...state,
         users: state.users.map((e) => {
@@ -33,25 +39,25 @@ const friendsReducer = (state = initialState, action) => {
           return e;
         })
       }
-    case 'SET_USERS': {
+    case SET_USERS: {
       return {
         ...state,
         users: [...action.users]
       }
     }
-    case 'SELECTED_PAGE': {
+    case SELECTED_PAGE: {
       return {
         ...state,
         currentPage: action.page,
       }
     }
-    case 'SET_TOTAL_USERS_COUNT': {
+    case SET_TOTAL_USERS_COUNT: {
       return {
         ...state,
         totalUsersCount: action.TotalUsersCount,
       }
     }
-    case 'TOGLE_IS_FETCHING': {
+    case TOGLE_IS_FETCHING: {
       return {
         ...state,
         isFetching: action.isFetching,
@@ -64,74 +70,70 @@ const friendsReducer = (state = initialState, action) => {
 
 export default friendsReducer;
 
-
-
-
-
 export const followActionCreator = (userId) => {
   return {
-    type: 'FOLLOW',
+    type: FOLLOW,
     userId,
   }
 }
 export const unfollowActionCreator = (userId) => {
   return {
-    type: 'UNFOLLOW',
+    type: UNFOLLOW,
     userId,
   }
 }
 export const setUsersActionCreator = (users) => {
   return {
-    type: 'SET_USERS',
+    type: SET_USERS,
     users,
   }
 }
-export const selectedPage = (page) => {
+export const selectedPageActionCreator = (page) => {
   return {
-    type: 'SELECTED_PAGE',
+    type: SELECTED_PAGE,
     page,
   }
 }
-export const setTotalUsersCount = (TotalUsersCount) => {
+export const setTotalUsersCountActionCreator = (TotalUsersCount) => {
   return {
-    type: 'SET_TOTAL_USERS_COUNT',
+    type: SET_TOTAL_USERS_COUNT,
     TotalUsersCount,
   }
 }
-export const togleIsFetching = (isFetching) => {
+export const togleIsFetchingActionCreator = (isFetching) => {
   return {
-    type: 'TOGLE_IS_FETCHING',
+    type: TOGLE_IS_FETCHING,
     isFetching,
   }
 }
 
-export const followThunkCreator = (id) => (dispatch) => {
-  followAPI(id)
-    .then((data) => {
-      if (data) {
-        dispatch(followActionCreator(id))
-      }
-    })
+export const followThunkCreator = (id) => async (dispatch) => {
+  const result = await followAPI(id);
+  if (result) {
+    dispatch(followActionCreator(id));
+  }
 }
 
-export const unFollowThunkCreator = (id) => (dispatch) => {
-  unfollowAPI(id)
-    .then((data) => {
-      if (data) {
-        dispatch(unfollowActionCreator(id))
-      }
-    })
+export const unFollowThunkCreator = (id) => async (dispatch) => {
+  const result = await unfollowAPI(id);
+  if (result) {
+    dispatch(unfollowActionCreator(id));
+  }
+
 }
 
-export const selectedPagesThunkCreator = (page) => (dispatch) => {
-  dispatch(togleIsFetching(true));
-  dispatch(selectedPage(page));
-  getUsersAPI(page)
-    .then(data => {
-      dispatch(togleIsFetching(false));
-      dispatch(setUsersActionCreator(data.users));
-      dispatch(setTotalUsersCount(data.totalUsersCount));
-    },(error)=> dispatch(unAuthThunkCreator()));
+export const selectedPagesThunkCreator = (page) => async (dispatch) => {
+  try {
+    dispatch(togleIsFetchingActionCreator(true));
+    dispatch(selectedPageActionCreator(page));
+    const pages = await getUsersAPI(page)
+    dispatch(togleIsFetchingActionCreator(false));
+    dispatch(setUsersActionCreator(pages.users));
+    dispatch(setTotalUsersCountActionCreator(pages.totalUsersCount));
+  }
+  catch (error) {
+    dispatch(unAuthThunkCreator());
+  }
 }
 
 

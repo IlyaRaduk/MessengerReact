@@ -1,7 +1,7 @@
 
 import { connect } from 'react-redux';
 import {followThunkCreator, unFollowThunkCreator, selectedPagesThunkCreator } from '../../../redux/friends-reducer';
-import FriendsClassAPI from './FriendsClassAPI';
+import Friends from './Friends';
 import { compose } from 'redux';
 import WithAuthRedirect from './../../../hoc/WithAuthRedirect';
 
@@ -31,6 +31,6 @@ let mapDispatchToProps = (dispatch) => {
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     WithAuthRedirect,
-)(FriendsClassAPI);
+)(Friends);
 
 

@@ -1,7 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import classes from './Registration.module.css';
 
-let Registration = (props) => {
+const Registration = (props) => {
   return (
     <div className={classes.registration}>
       <h2>Пройдите регистрацию</h2>
@@ -31,8 +31,8 @@ let Registration = (props) => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-            props.registrationNewAccount(values)
-            setSubmitting(false);
+          props.registrationNewAccount(values)
+          setSubmitting(false);
         }}
       >
         {({ isSubmitting }) => (
@@ -47,7 +47,7 @@ let Registration = (props) => {
             <Field className={classes.email} type="text" name="city" placeholder='Введите город' />
             <ErrorMessage className={classes.error} name="city" component="div" />
 
-            <Field className={classes.email} type="email" name="email"  placeholder='Введите email' />
+            <Field className={classes.email} type="email" name="email" placeholder='Введите email' />
             <ErrorMessage className={classes.error} name="email" component="div" />
 
             <Field className={classes.password} type="password" name="password" placeholder='Введите пароль' />

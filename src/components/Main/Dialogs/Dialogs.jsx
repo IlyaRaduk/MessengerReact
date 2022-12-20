@@ -4,8 +4,6 @@ import MessagesContainer from './Messages/MessagesContainer';
 import DialogsListContainer from './DialogsList/DialogsListContainer';
 import WithAuthRedirect from '../../../hoc/WithAuthRedirect';
 
-
-
 function Dialogs(props) {
     return (
         <div className={classes.wrapper}>

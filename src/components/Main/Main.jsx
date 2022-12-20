@@ -2,12 +2,11 @@ import NavigationContainer from './Navigation/NavigationContainer';
 import ProfileContainer from './Profile/ProfileContainer';
 import classes from './Main.module.css';
 import Dialogs from './Dialogs/Dialogs';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import About from './About/About';
 import FriendsContainer from './Friends/FriendsContainer';
 import LoginContainer from '../Login/LoginContainer';
 import RegistrationContainer from './Registration/RegistrationContainer';
-import { Navigate } from "react-router-dom"
 
 function Main() {
     return (

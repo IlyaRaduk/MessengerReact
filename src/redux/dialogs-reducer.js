@@ -1,3 +1,6 @@
+const CHANGE_LETTERS_MESSAGE = 'CHANGE_LETTERS_MESSAGE';
+const ADD_MESSAGE = 'ADD_MESSAGE';
+
 let initialState = {
   dialogsItems: [
     { name: 'Ilya', id: 1 },
@@ -17,24 +20,22 @@ let initialState = {
 }
 
 const dialogsReducer = (state = initialState, action) => {
-  if (action.type === 'CHANGE-LETTERS-MESSAGE') {
-    let copyState = {
-      ...state,
-      newMessageText: action.text,
-    }
-    return copyState;
-  }
-  else if (action.type === 'ADD-MESSAGE') {
-    let copyState = {
-      ...state,
-      messages: [...state.messages]
-    }
-    copyState.messages.push(state.newMessageText);
-    copyState.newMessageText = '';
-    return copyState;
-  }
-  else {
-    return state;
+  switch (action.type) {
+    case CHANGE_LETTERS_MESSAGE:
+      return {
+        ...state,
+        newMessageText: action.text,
+      }
+    case ADD_MESSAGE:
+      const messages = [...state.messages];
+      messages.push(state.newMessageText);
+      return {
+        ...state,
+        messages: messages,
+        newMessageText: '',
+      }
+    default:
+      return state;
   }
 }
 
@@ -42,13 +43,13 @@ export default dialogsReducer;
 
 export const addMessageActionCreator = () => {
   return {
-    type: 'ADD-MESSAGE',
+    type: ADD_MESSAGE,
   }
 }
 
 export const changeLettersMessageActionCreator = (text) => {
   return {
-    type: 'CHANGE-LETTERS-MESSAGE',
+    type: CHANGE_LETTERS_MESSAGE,
     text: text,
   }
 }

@@ -10,7 +10,7 @@ function Header(props) {
             <div className='container'>
                 <header className={classes.header}>
                     <h1 className={classes.title}>Messenger</h1>
-                    <NavLink to="/login"><Btn isActive={false} setClick={props.unAuth} title={'Sign out'} /></NavLink >
+                    {props.isAuth ? <NavLink to="/login"><Btn isActive={false} setClick={props.unAuth} title={'Sign out'} /></NavLink > : null}
                 </header>
             </div>
         </div>

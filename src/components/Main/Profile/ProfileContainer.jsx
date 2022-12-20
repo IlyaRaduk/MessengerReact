@@ -1,62 +1,26 @@
 import Profile from './Profile';
-import React from 'react';
 import { connect } from 'react-redux';
-import { getProfileThunkCreator, setStatusThunkCreator, checkStatusOwnerThunkCreator, blockStatusOwnerActionCreator } from '../../../redux/profile-reducer';
+import { getProfileThunkCreator, setStatusThunkCreator, checkStatusOwnerThunkCreator } from '../../../redux/profile-reducer';
 import Prelouder from './../../common/Prelouder/Prelouder';
-import {
-    useLocation,
-    useNavigate,
-    useParams,
-} from "react-router-dom";
 import { compose } from 'redux';
 import WithAuthRedirect from '../../../hoc/WithAuthRedirect';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-// wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
-function withRouter(Component) {
-    function ComponentWithRouterProp(props) {
-        let location = useLocation();
-        let navigate = useNavigate();
-        let params = useParams();
+const ProfileContainer = (props) => {
+    const id = useParams().id;
+    useEffect(() => {
+        props.getProfile(id);
+    }, [id]);
+
+    if (!props.profile) {
         return (
-            <Component
-                {...props}
-                router={{ location, navigate, params }}
-            />
-        );
+            <Prelouder />
+        )
     }
-
-    return ComponentWithRouterProp;
-}
-
-class ProfileContainer extends React.Component {
-
-    componentDidMount() {
-        this.props.getProfile(this.props.router.params.id)
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (!this.props.router.params.id && Number(prevProps.router.params.id)) {
-            this.props.getProfile(this.props.router.params.id);
-        }
-        if (this.props.router.params.id == true && Number(this.props.router.params.id) !== this.props.profile?.id) {
-            this.props.getProfile(this.props.router.params.id);
-        }
-
-    }
-
-    render() {
-        if (this.props.profile === null) {
-            return (
-                <Prelouder />
-            )
-        } else {
-            return (
-                <Profile blockStatusOwner={this.props.blockStatusOwner} allowsEditStatus={this.props.allowsEditStatus} checkStatusOwner={this.props.checkStatusOwner} profile={this.props.profile} setStatus={this.props.setStatus} />
-            )
-        }
-
-    }
-
+    return (
+        <Profile blockStatusOwner={props.blockStatusOwner} allowsEditStatus={props.allowsEditStatus} checkStatusOwner={props.checkStatusOwner} profile={props.profile} setStatus={props.setStatus} />
+    )
 }
 
 let mapStateToProps = (state) => {
@@ -65,6 +29,7 @@ let mapStateToProps = (state) => {
         allowsEditStatus: state.profilePage.allowsEditStatus,
     }
 }
+
 let mapDispatchToProps = (dispatch) => {
     return {
         getProfile: (id) => {
@@ -76,15 +41,10 @@ let mapDispatchToProps = (dispatch) => {
         checkStatusOwner: (id) => {
             dispatch(checkStatusOwnerThunkCreator(id))
         },
-        blockStatusOwner:()=>{
-            dispatch(blockStatusOwnerActionCreator())
-        }
     }
 }
 
-
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    withRouter,
     WithAuthRedirect,
 )(ProfileContainer);

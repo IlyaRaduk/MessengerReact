@@ -4,10 +4,9 @@ import Status from './Status/Status';
 let ProfileInfo = (props) => {
 
     return (
-
         <div className={classes.profileInfo}>
             <div className={classes.avatar}>
-                <img src={props.profile.photoUrl} className={classes.photo} alt='photo' />
+                <img src={props.profile.photoUrl} className={classes.photo} alt='avatar' />
             </div>
             <div className={classes.discription}>
                 <div className={classes.name}>
@@ -16,10 +15,9 @@ let ProfileInfo = (props) => {
                 <div className={classes.city}>
                     {props.profile.location.city}
                 </div>
-                <Status blockStatusOwner={props.blockStatusOwner} allowsEditStatus={props.allowsEditStatus} checkStatusOwner={props.checkStatusOwner} setStatus={props.setStatus} status={props.profile.status} id={props.profile.id} />
+                <Status allowsEditStatus={props.allowsEditStatus} checkStatusOwner={props.checkStatusOwner} setStatus={props.setStatus} status={props.profile.status} id={props.profile.id} />
             </div>
         </div>
-
     )
 }
 export default ProfileInfo;

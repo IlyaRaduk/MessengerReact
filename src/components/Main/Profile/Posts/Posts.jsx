@@ -27,4 +27,5 @@ function Posts(props) {
     </section>
   )
 }
+
 export default Posts;

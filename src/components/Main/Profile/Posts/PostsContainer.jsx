@@ -1,23 +1,6 @@
 import Posts from './Posts';
 import { addPostsThunkCreator, changeLettersActionCreator } from '../../../../redux/profile-reducer';
 import { connect } from 'react-redux';
-import React from 'react';
-
-class PostsContainer extends React.Component {
-
-  componentDidMount(){
-
-  }
-
-  render() {
-
-    return (
-      <Posts profileId={this.props.profileId} newPostText={this.props.newPostText} postsItems={this.props.postsItems} addPost={this.props.addPost} changeLetters={this.props.changeLetters} />
-    )
-  }
-
-}
-
 
 const mapStateToProps = (state) => {
   return {
@@ -33,5 +16,5 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostsContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(Posts);
 
