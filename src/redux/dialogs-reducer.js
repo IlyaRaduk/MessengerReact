@@ -1,5 +1,5 @@
-const CHANGE_LETTERS_MESSAGE = 'CHANGE_LETTERS_MESSAGE';
-const ADD_MESSAGE = 'ADD_MESSAGE';
+const CHANGE_LETTERS_MESSAGE = 'dialogs/CHANGE_LETTERS_MESSAGE';
+const ADD_MESSAGE = 'dialogs/ADD_MESSAGE';
 
 let initialState = {
   dialogsItems: [

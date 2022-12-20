@@ -1,8 +1,8 @@
 import { registrationNewAccount } from "../api";
 import { login } from "../api";
 
-const SET_USER_DATA = 'SET_USER_DATA';
-const UNAUTH = 'UNAUTH';
+const SET_USER_DATA = 'auth/SET_USER_DATA';
+const UNAUTH = 'auth/UNAUTH';
 
 let initialState = {
   isAuth: true,

@@ -1,12 +1,12 @@
 import { getProfileAPI, setStatusAPI, addPostsAPI, checkStatusOwnerAPI } from "../api";
 import { unAuthThunkCreator } from "./auth-reducer";
 
-const ADD_POST = 'ADD_POST';
-const CHANGE_LETTERS = 'CHANGE_LETTERS';
-const SET_PROFILE = 'SET_PROFILE';
-const SET_STATUS = 'SET_STATUS';
-const CHECK_STATUS_OWNER = 'CHECK_STATUS_OWNER';
-const BLOCK_STATUS_OWNER = 'BLOCK_STATUS_OWNER';
+const ADD_POST = 'profile/ADD_POST';
+const CHANGE_LETTERS = 'profile/CHANGE_LETTERS';
+const SET_PROFILE = 'profile/SET_PROFILE';
+const SET_STATUS = 'profile/SET_STATUS';
+const CHECK_STATUS_OWNER = 'profile/CHECK_STATUS_OWNER';
+const BLOCK_STATUS_OWNER = 'profile/BLOCK_STATUS_OWNER';
 
 let initialState = {
   profile: null,

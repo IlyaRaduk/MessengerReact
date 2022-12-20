@@ -1,12 +1,12 @@
 import { followAPI, unfollowAPI, getUsersAPI } from "../api";
 import { unAuthThunkCreator } from "./auth-reducer";
 
-const FOLLOW = 'FOLLOW';
-const UNFOLLOW = 'UNFOLLOW';
-const SET_USERS = 'SET_USERS';
-const SELECTED_PAGE = 'SELECTED_PAGE';
-const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
-const TOGLE_IS_FETCHING = 'TOGLE_IS_FETCHING';
+const FOLLOW = 'friends/FOLLOW';
+const UNFOLLOW = 'friends/UNFOLLOW';
+const SET_USERS = 'friends/SET_USERS';
+const SELECTED_PAGE = 'friends/SELECTED_PAGE';
+const SET_TOTAL_USERS_COUNT = 'friends/SET_TOTAL_USERS_COUNT';
+const TOGLE_IS_FETCHING = 'friends/TOGLE_IS_FETCHING';
 
 let initialState = {
   users: [],
